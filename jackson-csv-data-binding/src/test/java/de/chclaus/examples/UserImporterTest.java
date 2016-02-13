@@ -18,17 +18,32 @@ import static org.junit.Assert.assertEquals;
 public class UserImporterTest {
 
   @Test
-  public void testImportUsers() throws URISyntaxException, IOException {
+  public void testImportUsersWithJackson() throws URISyntaxException, IOException {
     Path path = Paths.get("src/test/resources/users.csv");
-    List<User> users = UserImporter.importUsers(path.toUri().toURL());
+    List<User> users = UserImporter.importUsersWithJackson(path.toUri().toURL());
+    checkList(users);
+  }
 
-    // Tests if there is really just one user inside the list.
-    assertEquals(users.size(), 1);
+  @Test
+  public void testImportUsersWithApacheCsv() throws URISyntaxException, IOException {
+    Path path = Paths.get("src/test/resources/users.csv");
+    List<User> users = UserImporter.importUsersWithApacheCsv(path.toUri().toURL());
+    checkList(users);
+  }
+
+  private void checkList(List<User> users) {
+    // Tests if there are really two users inside the list.
+    assertEquals(users.size(), 2);
 
     // Tests if the attributes of the import-user are correct.
-    User user = users.get(0);
-    assertEquals("famousUser", user.getUsername());
-    assertEquals("secret", user.getPassword());
-    assertEquals("famousUser@acme.com", user.getEmail());
+    User famousUser = users.get(0);
+    assertEquals("famousUser", famousUser.getUsername());
+    assertEquals("secret", famousUser.getPassword());
+    assertEquals("famousUser@acme.com", famousUser.getEmail());
+
+    User anotherUser = users.get(1);
+    assertEquals("anotherUser", anotherUser.getUsername());
+    assertEquals("withAnotherSecret", anotherUser.getPassword());
+    assertEquals("andAnIncredibleEmailAddy@acme.com", anotherUser.getEmail());
   }
 }

@@ -1,2 +1,3 @@
-username,password,email,deleted
+username,password,email
 famousUser,secret,famousUser@acme.com
+anotherUser,withAnotherSecret,andAnIncredibleEmailAddy@acme.com
