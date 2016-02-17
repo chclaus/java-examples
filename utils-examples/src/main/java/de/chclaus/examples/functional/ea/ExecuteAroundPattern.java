@@ -57,7 +57,7 @@ public class ExecuteAroundPattern {
     try {
       statement = conn.prepareStatement(sql);
     } catch (SQLException e) {
-      // Handle exception. (i.e. some logging)
+      // Handle exception. I.e. some logging and you should return because an potential npe.
     }
 
     try {
