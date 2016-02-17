@@ -64,7 +64,8 @@ public class ExecuteAroundPattern {
       ResultSet results = statement.executeQuery();
       try {
         while (results.next()) {
-          // Our important code for each result.
+          // Here is the important code for us. Just this one line - the rest is boilerplate.
+          System.out.println(results.getString(0) + ", " + results.getString(1));
         }
       } finally {
         results.close();
@@ -91,6 +92,7 @@ public class ExecuteAroundPattern {
    */
   public void executeSqlWithEA(Connection conn, String sql) {
     EAUtils.executeSql(conn, sql, rs -> {
+      // Here is the important code for us. And it is just one line. :)
       System.out.println(rs.getString(0) + ", " + rs.getString(1));
     });
 
