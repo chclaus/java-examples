@@ -12,7 +12,7 @@ import java.net.URL;
  * Tests if the classic method {@link ExecuteAroundPattern#handleFile(URL)}, which prints the content of a file
  * to System.out, does exactly the same as the new method {@link ExecuteAroundPattern#handleFileWithEA(URL)}.
  *
- * @author Christian Claus (c.claus@micromata.de)
+ * @author Christian Claus (ch.claus@me.com)
  */
 public class ExecuteAroundPatternTest {
 

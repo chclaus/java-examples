@@ -6,10 +6,14 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
- * @author Christian Claus (c.claus@micromata.de)
+ * @author Christian Claus (ch.claus@me.com)
  */
 public class ExecuteAroundPattern {
 
@@ -40,6 +44,58 @@ public class ExecuteAroundPattern {
   public void handleFileWithEA(URL resource) {
     EAUtils.handleLine(resource, System.out::println);
   }
+
+  /**
+   * Just a further and more complex demonstration <b>without</b> the execute-around-pattern,
+   * used by <a href="http://chclaus.de/2016/02/17/java8-execute-around">chclaus.de</a>
+   *
+   * @param conn the current sql connection.
+   * @param sql the sql which should be executed.
+   */
+  public void executeSql(Connection conn, String sql) {
+    PreparedStatement statement = null;
+    try {
+      statement = conn.prepareStatement(sql);
+    } catch (SQLException e) {
+      // Handle exception. (i.e. some logging)
+    }
+
+    try {
+      ResultSet results = statement.executeQuery();
+      try {
+        while (results.next()) {
+          // Our important code for each result.
+        }
+      } finally {
+        results.close();
+      }
+    } catch (SQLException e) {
+      // Handle exception. (i.e. some logging)
+    } finally {
+      try {
+        if (statement != null) {
+          statement.close();
+        }
+      } catch (SQLException e) {
+        // Handle exception. (i.e. some logging)
+      }
+    }
+  }
+
+  /**
+   * Just a further and more complex demonstration <b>of</b> the execute-around-pattern,
+   * used by <a href="http://chclaus.de/2016/02/17/java8-execute-around">chclaus.de</a>
+   *
+   * @param conn the current sql connection.
+   * @param sql the sql which should be executed.
+   */
+  public void executeSqlWithEA(Connection conn, String sql) {
+    EAUtils.executeSql(conn, sql, rs -> {
+      System.out.println(rs.getString(0) + ", " + rs.getString(1));
+    });
+
+  }
+
 
 
 

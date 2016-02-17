@@ -13,7 +13,7 @@ import java.io.PrintStream;
  *
  * Inspireded by a Spring-Rule, but just the out- and not the err-Stream.
  *
- * @author Christian Claus (c.claus@micromata.de)
+ * @author Christian Claus (ch.claus@me.com)
  * @see <a href="https://github.com/spring-projects/spring-boot/blob/master/spring-boot/src/main/java/org/springframework/boot/test/OutputCapture.java">OutputCapture</a>
  */
 public class OutputStreamCapture implements TestRule {

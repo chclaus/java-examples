@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 /**
- * @author Christian Claus (c.claus@micromata.de)
+ * @author Christian Claus (ch.claus@me.com)
  */
 public class UserImporter {
 

@@ -13,7 +13,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * Test for desearializing a list of users of a csv.
  *
- * @author Christian Claus (c.claus@micromata.de)
+ * @author Christian Claus (ch.claus@me.com)
  */
 public class UserImporterTest {
 
