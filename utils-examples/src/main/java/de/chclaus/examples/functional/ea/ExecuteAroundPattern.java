@@ -57,7 +57,7 @@ public class ExecuteAroundPattern {
     try {
       statement = conn.prepareStatement(sql);
     } catch (SQLException e) {
-      // Handle exception. I.e. some logging and you should return because an potential npe.
+      // Handle exception. I.e. some logging and you should return because a potential npe.
     }
 
     try {
@@ -91,9 +91,12 @@ public class ExecuteAroundPattern {
    * @param sql the sql which should be executed.
    */
   public void executeSqlWithEA(Connection conn, String sql) {
-    EAUtils.executeSql(conn, sql, rs -> {
-      // Here is the important code for us. And it is just one line. :)
-      System.out.println(rs.getString(0) + ", " + rs.getString(1));
+    EAUtils.executeSql(conn, sql, new ResultSetConsumer() {
+      @Override
+      public void accept(ResultSet rs) throws SQLException {
+        // Here is the important code for us. And it is just one line. :)
+        System.out.println(rs.getString(0) + ", " + rs.getString(1));
+      }
     });
 
   }
